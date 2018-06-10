@@ -1,0 +1,62 @@
+[OSE3:children]
+masters
+nodes
+etcd
+
+[OSE3:vars]
+ansible_ssh_user=root
+dynamic_volumes_check=False
+openshift_clock_enables=True
+openshift_disable_check=docker_storage,memory_availability,disk_availability,docker_storage_drive,docker_image_availability,package_version,package_availability,package_update
+openshift_deployment_type=origin
+openshift_release=v3.9
+openshift_image_tag=v3.9.14
+
+containerized=False
+
+openshift_ip=192.168.1.39
+openshift_master_cluster_method=native
+#openshift_master_cluster_public_hostname=openshift.192.168.1.39.nip.io
+#openshift_hosted_registry_routehost=registry.192.168.1.39.nip.io
+#openshift_master_default_subdomain=apps.192.168.1.39.nip.io
+
+os_firewall_use_firewalld=False
+
+openshift_master_identity_providers=[{'name': 'htpasswd_auth', 'login': 'true', 'challenge': 'true', 'kind': 'HTPasswdPasswordIdentityProvider', 'filename': '/etc/origin/master/htpasswd'}]
+
+osm_default_node_selector='region=primary'
+
+template_service_broker_selector={"region": "infra"}
+
+openshift_hosted_router_selector='region=infra'
+openshift_hosted_router_replicas=1
+
+openshift_hosted_registry_selector='region=infra'
+openshift_hosted_registry_replicas=1
+
+openshift_metrics_install_metrics=true
+openshift_metrics_image_version=v3.9
+openshift_metrics_cassandra_nodeselector={"region":"infra", "zone":"interno"}
+openshift_metrics_hawkular_nodeselector={"region":"infra", "zone":"interno"}
+openshift_metrics_heapster_nodeselector={"region":"infra", "zone":"interno"}
+openshift_metrics_duration=90
+
+openshift_metrics_cassandra_storage_type=emptydir
+openshift_metrics_cassandra_pvc_prefix=cassandra-pvc
+openshift_metrics_cassandra_pvc_size=10Gi
+
+openshift_master_metrics_public_url=https://metrics.192.168.1.39.nip.io/hawkular/metrics
+
+openshift_logging_install_logging=true
+
+openshift_use_crio=true
+openshift_crio_enable_docker_gc=true
+
+[masters]
+master.192.168.1.39.nip.io
+
+[etcd]
+master.192.168.1.39.nip.io
+
+[nodes]
+master.192.168.1.39.nip.io
