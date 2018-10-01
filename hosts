@@ -4,13 +4,13 @@ nodes
 etcd
 
 [masters]
-${IP} openshift_ip=${IP} openshift_schedulable=true
+${IP} openshift_ip=${IP} ansible_connection=local openshift_schedulable=true
 
 [etcd]
-${IP} openshift_ip=${IP}
+${IP} openshift_ip=${IP} ansible_connection=local 
 
 [nodes]
-${IP} openshift_ip=${IP} openshift_schedulable=true openshift_node_group_name='node-config-all-in-one'
+${IP} openshift_ip=${IP} ansible_connection=local openshift_schedulable=true openshift_node_group_name='node-config-all-in-one'
 
 [OSEv3:vars]
 ansible_ssh_user=root
